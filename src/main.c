@@ -19,6 +19,16 @@ int main(int argc,char*argv[]){
         return 0;
     }
     if(!(strcmp(argv[1],"--check")&&strcmp(argv[1],"-c"))){
+        //reading the number of threads
+        int threads=get_threads();
+        printf("Family: 0x%02x\tModel: 0x%02x\t",rd_family(),rd_model());
+        printf("Threads: %d\n",threads);
+        //reading frequency on every thread
+        printf("Frequency: ");
+        float freq[threads];
+        get_freq(threads,freq);
+        for(int i=0;i<threads;i++) printf("cpu%d:%.3fMHz ",i,freq[i]);
+        printf("\n");
         //reading voltage
         float vol=rdvol();
         if(vol<0.0) printf("Reading msr failed.\nVoltage and power info can't be read.\nIs this command executed by the superuser, or is msr module loaded into the kernel?");
@@ -31,16 +41,6 @@ int main(int argc,char*argv[]){
             printf("Agent: %fmv\t",rd_adj_volt(3));
             printf("Analog: %fmv\n",rd_adj_volt(4));
         }
-        //reading the number of threads
-        int threads=get_threads();
-        printf("Family: 0x%02x\tModel: 0x%02x\t",rd_family(),rd_model());
-        printf("Threads: %d\n",threads);
-        //reading frequency on every thread
-        printf("Frequency: ");
-        float freq[threads];
-        get_freq(threads,freq);
-        for(int i=0;i<threads;i++) printf("cpu%d:%.3fMHz ",i,freq[i]);
-        printf("\n");
     }
     else if(!(strcmp(argv[1],"-wv")&&strcmp(argv[1],"--write_voltage"))){
         if(check_ability()<0) return -1;
@@ -55,7 +55,7 @@ int main(int argc,char*argv[]){
         else{
             enum DEVICE device;
             if(!strcmp(argv[2],"core")) device=0;
-            else if(!strcmp(argv[2],"gpu")) device=1;
+            else if(!strcmp(argv[2],"igpu")) device=1;
             else if(!strcmp(argv[2],"cache")) device=2;
             else if(!strcmp(argv[2],"agent")) device=3;
             else if(!strcmp(argv[2],"analog")) device=4;
