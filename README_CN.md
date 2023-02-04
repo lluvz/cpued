@@ -1,9 +1,9 @@
-**项目仍在开发中，这意味着它可能不完整。**
 ## 使用方法  
 请用超级用户（如root）运行该程序  
 
 1.查看cpu状态  
 要查看cpu运行状态和信息（频率，电压，功耗等），运行`sudo ./cpued -c`或者`sudo ./cpued --check`  
+读取电压和功耗目前仅支持部分intel平台  
 输出例子：  
 `Family: 0x06   Model:  0x8e    Threads: 4`  
 `Frequency: cpu0:700.073MHz cpu1:700.000MHz cpu2:699.986MHz cpu3:700.036MHz`  

@@ -1,9 +1,9 @@
-**The project is still in development, which means it is not complete!**
 ## Usage
 Run as a super user e.g. root  
 
 1.check cpu status  
-To check cpu information including frequency, voltage and power,run `sudo ./cpued -c` or `sudo ./cpued --check`
+To check cpu information including frequency, voltage and power,run `sudo ./cpued -c` or `sudo ./cpued --check`  
+Reading voltage and power is only supported on some intel platforms.  
 example output:  
 `Family: 0x06   Model:  0x8e    Threads: 4`  
 `Frequency: cpu0:700.073MHz cpu1:700.000MHz cpu2:699.986MHz cpu3:700.036MHz`  
