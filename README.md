@@ -9,24 +9,27 @@ example output:
 `Frequency: cpu0:700.073MHz cpu1:700.000MHz cpu2:699.986MHz cpu3:700.036MHz`  
 `Voltage: 0.640869v      Power:3.090210w`    
 `To read the offset voltage, use '-rv' or '--read_voltage'. It may cause potential damage to unsupported device.`  
-At present, showing voltage and power is only support for some of the intel chips.  
+At present, showing voltage and power is only supported for some of the intel chips.  
 
 2.read offset voltage  
-**Warning: reading or writing offset voltage on unsupported device may cause potential problem**
-To read the set voltage, run `sudo ./cpued -rv` or `sudo ./cpued --read_voltage`  
+**Warning: reading or writing offset voltage on device which do not support FIVR may cause potential problem**
+To read the offset voltage, run `sudo ./cpued -rv` or `sudo ./cpued --read_voltage`  
 example output:  
-`Core: -125.000000mv     iGPU: 0.000000mv        Cache: -125.000000mv    Agent: 0.000000mv       Analog: 0.000000mv`
+`Core: -125.000000mv     iGPU: 0.000000mv        Cache: -125.000000mv    Agent: 0.000000mv       Analog: 0.000000mv`  
 
 3.write offset voltage
-**Warning: undervolting may cause permanent damage to your hardware!**  
+**Warning: addjusting voltage may cause permanent damage to your hardware!**  
 To write a offset voltage, run `sudo ./cpued -wv {device} {voltage}`  
 {device} can be `core`,`cache`,`igpu`,`agent` or `analog`  
-The unit of voltage is mv.  
-For example, to undervolt cpu core by -125mv, run
-`sudo ./cpued -wv core -125`
+The unit of {voltage} is mv.  
+For example, to undervolt cpu core by -125mv, run  
+`sudo ./cpued -wv core -125`  
 On some platform, to make the offset voltage on cpu to take effect, writing to both core and cache is needed.
 
 ## Future plan  
-- GUI
-- Adjusting frequency or frequency plan
-- Identify CPU that support undervolt
+- GUI  
+- Adjusting frequency or frequency plan  
+- Identify CPU that support undervolt by FIVR  
+- Auto set offset voltage when starting up  
+- More precise power monitor  
+- Make package into `.deb`,`.rpm` or `.tar`
