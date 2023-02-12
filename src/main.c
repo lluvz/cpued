@@ -60,13 +60,9 @@ int main(int argc,char*argv[]){
         }
     }
     else if(!(strcmp(argv[1],"-wv")&&strcmp(argv[1],"--write_voltage"))){
-        if(check_ability()<0) return -1;
-        if(argc<3){
-            printf("Please specify the device to modify.\n");
-            return -1;
-        }
-        else if(argc<4){
-            printf("Please specify the offset voltage to apply.\n");
+        if(check_ability()<0) return -1;if(argc<4){
+            printf("No enough arguments, please use the supported command.\n");
+            printf("For example: [ sudo ./cpued -wv core -125 ] to undervolt cpu core by 125mv");
             return -1;
         }
         else{
@@ -76,6 +72,11 @@ int main(int argc,char*argv[]){
             else if(!strcmp(argv[2],"cache")) device=2;
             else if(!strcmp(argv[2],"agent")) device=3;
             else if(!strcmp(argv[2],"analog")) device=4;
+            else{
+                printf("Please specify one of the following device for changing voltage:\n");
+                printf("core, cache, igpu, agent or analog.\n");
+                return -1;
+            }
             float voltage=atof(argv[3]);
             adj_volt(device,voltage);
             printf("The offset voltage is set to %fv, which may not perfectly match the input one.\n",rd_adj_volt(device));
