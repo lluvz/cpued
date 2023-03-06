@@ -1,7 +1,7 @@
 ## 使用方法  
 请用超级用户（如root）运行该程序  
 
-1.查看cpu状态  
+1. 查看cpu状态  
 要查看cpu运行状态和信息（频率，电压，功耗等），运行`sudo ./cpued -c`或者`sudo ./cpued --check`  
 读取电压和功耗目前仅支持部分intel平台  
 输出例子：  
@@ -11,13 +11,13 @@
 `To read the offset voltage, use '-rv' or '--read_voltage'. It may cause potential damage to unsupported device.`  
 目前，仅有部分intel处理器支持查看电压和功耗  
 
-2.获取偏移电压  
+2. 获取偏移电压  
 **警告：在不支持FIVR的平台上读写偏移电压可能导致潜在问题**  
 要获取偏移电压，运行`sudo ./cpued -rv`或者`sudo ./cpued --read_voltage`  
 输出例子：  
 `Core: -125.000000mv     iGPU: 0.000000mv        Cache: -125.000000mv    Agent: 0.000000mv       Analog: 0.000000mv`  
 
-3.写入偏移电压
+3. 写入偏移电压
 **警告：修改电压可能会造成硬件的永久损伤**  
 要写入偏转电压，运行`sudo ./cpued -wv {device} {voltage}`  
 {device}可以是`core`,`cache`,`igpu`,`agent`或者`analog`  
@@ -25,6 +25,10 @@
 例如，将cpu核心电压调低-125mv，运行  
 `sudo ./cpued -wv core -125`  
 对于某些平台的cpu，为使cpu降压生效，需要将核心(core)和缓存(cache)都调节
+
+4. 使用脚本自动执行
+.sh文件可以用于执行多个命令。**警告：脚本cpued.sh仅仅是一个例子，也许并不适用于您的机器。若您有不同的需求，请修改该文件** 
+若要运行该脚本，先使用`chmod +x cpued.sh`命令使之获取可执行的权限。之后，您可以使用`sudo ./cpued.sh`去运行它（无需重复运行`chmod`指令）。
 
 ## 未来计划  
 - 图形界面  

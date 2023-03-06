@@ -29,7 +29,7 @@ On some platform, to make the offset voltage on cpu to take effect, writing to b
 4. use script to save time 
 The file cpued.sh is a script which be used to execute multiple commands.**Warning: The file is only an example, which may not suit your mechine. Please change it for your own when needed** 
 To run it, execute `chmod +x cpued.sh` to make it executable. Afterwards, you can use
-`sudo ./cpued.sh` to execute it. 
+`sudo ./cpued.sh` to execute it(no need to rerun `chmod`). 
 
 ## Future plan  
 - GUI  
